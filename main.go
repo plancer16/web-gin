@@ -5,29 +5,30 @@ import (
 	"net/http"
 )
 
+// album的增加和查询
 type album struct {
-	ID string `json:"id"`
-	Title string `json:"title"`
-	Artist string `json:"artist"`
-	Price float64 `json:"price"`
+	ID     string  `json:"id"`
+	Title  string  `json:"title"`
+	Artist string  `json:"artist"`
+	Price  float64 `json:"price"`
 }
 
 func getAlbums(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, albums)//输出json
+	c.IndentedJSON(http.StatusOK, albums) //输出json
 }
-func postAlbums (c *gin.Context) {
+func postAlbums(c *gin.Context) {
 	var newAlbum album
-	if err := c.BindJSON(&newAlbum); err != nil {//请求体绑到newAlbum
+	if err := c.BindJSON(&newAlbum); err != nil { //请求体绑到newAlbum
 		return
 	}
-	albums = append(albums, newAlbum)//加到常量里面
+	albums = append(albums, newAlbum) //加到常量里面
 	c.IndentedJSON(http.StatusCreated, newAlbum)
 }
 
 func getAlbumByID(c *gin.Context) {
 	id := c.Param("id")
 
-	for _,a := range albums{
+	for _, a := range albums {
 		if a.ID == id {
 			c.IndentedJSON(http.StatusOK, a)
 			return
@@ -44,8 +45,8 @@ var albums = []album{
 
 func main() {
 	router := gin.Default()
-	router.GET("/albums",getAlbums)
-	router.GET("/albums/:id",getAlbumByID)
-	router.POST("/albums",postAlbums)
+	router.GET("/albums", getAlbums)
+	router.GET("/albums/:id", getAlbumByID)
+	router.POST("/albums", postAlbums)
 	router.Run("localhost:8080")
 }
