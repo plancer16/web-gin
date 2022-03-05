@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// album的增加和查询
+// album的增加和查询 test
 type album struct {
 	ID     string  `json:"id"`
 	Title  string  `json:"title"`
