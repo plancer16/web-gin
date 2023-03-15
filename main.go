@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 // album的增加和查询 test
@@ -50,3 +51,7 @@ func main() {
 	router.POST("/albums", postAlbums)
 	router.Run("localhost:8080")
 }
+
+//testRebase
+
+//testRebase2
